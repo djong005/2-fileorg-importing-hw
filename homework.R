@@ -20,6 +20,10 @@
 # ANSWER
 installed.packages("tidyverse")
 library(readr)
+library(tidyverse)
+install.packages("here")
+library(here)
+library(fs)
 
 ### QUESTION 2 ----- 
 
@@ -38,6 +42,11 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+here("data_A/6191_1.txt")
+getwd()
+
+ds1 <- read_tsv("data_A/6191_1.txt",col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7)
+
 ### QUESTION 3a. ----- 
 
 # For some reason, the trial numbers for this experiment should start at 100
@@ -45,6 +54,8 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
+ds1$trial_num <- as.numeric(ds1$trial_num)
+ds1$trial_num2 <- ds1$trial_num + 100
 
 ### QUESTION 3b. ----- 
 # Write the new data from question 3a to a CSV file in the "data_A_cleaned" folder
@@ -61,14 +72,15 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 # Store it to a variable
 
 # ANSWER
-
+full_file_names <- list.files('data_A', full.names=T)
 
 ### QUESTION 5 ----- 
 
 # Read all of the files in data_A into a single tibble called ds
 
 # ANSWER
-
+ds <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7)
+print(ds1)
 
 ### QUESTION 6 -----
 
@@ -81,7 +93,8 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 # (It should work now, but you'll see a warning because of the erroneous data point)
 
 # ANSWER
-
+ds$trial_num <- as.integer(ds1$trial_num)
+ds$trial_num2 <- ds1$trial_num + 100
 
 ### QUESTION 7 -----
 
