@@ -54,7 +54,7 @@ ds1 <- read_tsv("data_A/6191_1.txt",col_name=c("trial_num","speed_actual","speed
 
 # ANSWER
 
-ds1$trial_num <- as.numeric(ds1$trial_num)
+ds1$trial_num <- as.integer(ds1$trial_num)
 ds1$trial_num2 <- ds1$trial_num + 100
 
 ### QUESTION 3b. ----- 
