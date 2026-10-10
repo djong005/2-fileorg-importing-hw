@@ -45,6 +45,7 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 getwd()
 here()
 here("data_A","6191_1.txt")
+file.exists(here("data_A","6191_1.txt"))
 
 ds1 <- read_tsv("data_A/6191_1.txt",col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7)
 print(ds1)
@@ -57,6 +58,7 @@ print(ds1)
 # ANSWER
 
 ds1$trial_num2 <- ds1$trial_num + 100
+print(ds1)
 
 ### QUESTION 3b. ----- 
 # Write the new data from question 3a to a CSV file in the "data_A_cleaned" folder
@@ -74,7 +76,7 @@ if(!dir.exists("data_A_cleaned"))dir.create("data_A_cleaned")
 
 write_csv(ds1,file="data_A_cleaned/261010_6191_1.csv")
 
-# I used snakecase because that seemed like the most optimal choice after our discussion in class. I plan to use R in the future, and snakecase is the least sensitive style.
+# I used snake_case because that seemed like the most optimal choice after our discussion in class. I plan to use R in the future, and snakecase is the least sensitive style.
 
 ### QUESTION 4 ----- 
 
@@ -103,8 +105,11 @@ print(ds)
 # (It should work now, but you'll see a warning because of the erroneous data point)
 
 # ANSWER
-ds$trial_num <- as.integer(ds$trial_num)
+ds$trial_num <- ds$trial_num + 100
+
+ds <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7,col_type="iccl")
 ds$trial_num2 <- ds$trial_num + 100
+
 
 ### QUESTION 7 -----
 
@@ -115,8 +120,11 @@ ds$trial_num2 <- ds$trial_num + 100
 
 # ANSWER
 
-# ?read_tsv
-ds3 <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7,id="Group")
+print(ds)
+?read_tsv
+ds <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7,col_type="iccl",id="file_num")
+ds$trial_num2 <- ds$trial_num + 100
+print(ds)
 
 
 ### QUESTION 8 -----
@@ -130,7 +138,7 @@ ds3 <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_res
 # install.packages("readxl")
 library(readxl)
 
-ex1 <- read_excel("data_B/participant_info.xlsx",sheet=1)
-print(ex1)
-ex2 <- read_excel("data_B/participant_info.xlsx",sheet=2,col_names=FALSE)
-print(ex2)
+sheet_1 <- read_excel("data_B/participant_info.xlsx",sheet=1)
+print(sheet_1)
+sheet_2 <- read_excel("data_B/participant_info.xlsx",sheet=2,col_names=FALSE)
+print(sheet_2)
