@@ -18,10 +18,10 @@
 # Load the readr package
 
 # ANSWER
-installed.packages("tidyverse")
+# install.packages("tidyverse")
 library(readr)
 library(tidyverse)
-install.packages("here")
+# install.packages("here")
 library(here)
 library(fs)
 
@@ -42,10 +42,12 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 
-here("data_A/6191_1.txt")
 getwd()
+here()
+here("data_A","6191_1.txt")
 
 ds1 <- read_tsv("data_A/6191_1.txt",col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7)
+print(ds1)
 
 ### QUESTION 3a. ----- 
 
@@ -54,7 +56,6 @@ ds1 <- read_tsv("data_A/6191_1.txt",col_name=c("trial_num","speed_actual","speed
 
 # ANSWER
 
-ds1$trial_num <- as.integer(ds1$trial_num)
 ds1$trial_num2 <- ds1$trial_num + 100
 
 ### QUESTION 3b. ----- 
@@ -65,6 +66,13 @@ ds1$trial_num2 <- ds1$trial_num + 100
 
 # ANSWER
 
+# creating folder
+
+if(!dir.exists("data_A_cleaned"))dir.create("data_A_cleaned")
+
+# writing data to csv file
+
+write_csv(ds1,file="data_A_cleaned/ds1.csv")
 
 ### QUESTION 4 ----- 
 
