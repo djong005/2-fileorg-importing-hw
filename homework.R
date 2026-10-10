@@ -72,7 +72,9 @@ if(!dir.exists("data_A_cleaned"))dir.create("data_A_cleaned")
 
 # writing data to csv file
 
-write_csv(ds1,file="data_A_cleaned/ds1.csv")
+write_csv(ds1,file="data_A_cleaned/261010_6191_1.csv")
+
+# I used snakecase because that seemed like the most optimal choice after our discussion in class. I plan to use R in the future, and snakecase is the least sensitive style.
 
 ### QUESTION 4 ----- 
 
@@ -88,7 +90,7 @@ full_file_names <- list.files('data_A', full.names=T)
 
 # ANSWER
 ds <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7)
-print(ds1)
+print(ds)
 
 ### QUESTION 6 -----
 
@@ -101,8 +103,8 @@ print(ds1)
 # (It should work now, but you'll see a warning because of the erroneous data point)
 
 # ANSWER
-ds$trial_num <- as.integer(ds1$trial_num)
-ds$trial_num2 <- ds1$trial_num + 100
+ds$trial_num <- as.integer(ds$trial_num)
+ds$trial_num2 <- ds$trial_num + 100
 
 ### QUESTION 7 -----
 
@@ -113,6 +115,9 @@ ds$trial_num2 <- ds1$trial_num + 100
 
 # ANSWER
 
+# ?read_tsv
+ds3 <- read_tsv(full_file_names,col_name=c("trial_num","speed_actual","speed_response","correct"),skip=7,id="Group")
+
 
 ### QUESTION 8 -----
 
@@ -122,3 +127,10 @@ ds$trial_num2 <- ds1$trial_num + 100
 
 # ANSWER
 
+# install.packages("readxl")
+library(readxl)
+
+ex1 <- read_excel("data_B/participant_info.xlsx",sheet=1)
+print(ex1)
+ex2 <- read_excel("data_B/participant_info.xlsx",sheet=2,col_names=FALSE)
+print(ex2)
